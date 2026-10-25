@@ -1,0 +1,18 @@
+{% assign hero = sky.aircraft[0] %}
+<div class="layout layout--col layout--center">
+  {% if sky.error == true %}
+    <span class="title">The feed is silent</span>
+  {% elsif sky.count == 0 %}
+    <span class="title">Quiet sky</span>
+    <span class="description">Nothing within {{ sky.radiusKm }} km</span>
+  {% else %}
+    <span class="value value--large">{{ hero.cs }}</span>
+    <span class="label">{{ hero.typ }}</span>
+    <span class="description">{{ hero.altText }} · {{ hero.where }}</span>
+    {% if sky.count > 1 %}<span class="description">+{{ sky.count | minus: 1 }} more</span>{% endif %}
+  {% endif %}
+</div>
+<div class="title_bar">
+  <span class="title">Overhead · {{ sky.place }}</span>
+  <span class="instance">{{ sky.clock }}</span>
+</div>

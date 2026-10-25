@@ -4,5 +4,5 @@ custom_fields:
   location: '49.4722, 7.7677'
   place: Home
   radius_km: 40
-  show_ground: 'no'
+  show_ground: false
 time_zone: Europe/Berlin

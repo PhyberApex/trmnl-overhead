@@ -1,50 +1,51 @@
 ---
-name: Overhead
 strategy: polling
-polling_verb: get
-polling_url: 'https://api.adsb.lol/v2/lat/{{ location | split: "," | first | strip }}/lon/{{ location | split: "," | last | strip }}/dist/{{ radius_km | default: 40 | times: 0.54 | ceil }}'
-polling_headers: 'accept=application/json&user-agent=trmnl-overhead/0.2 (+https://github.com/PhyberApex/trmnl-overhead)'
-refresh_interval: 10
 no_screen_padding: 'yes'
 dark_mode: 'no'
+static_data:
+polling_verb: get
+framework_version:
+serverless_language: node
+refresh_interval_floor:
+polling_url: 'https://api.adsb.lol/v2/lat/{{ location | split: "," | first | strip }}/lon/{{ location | split: "," | last | strip }}/dist/{{ radius_km | default: 40 | times: 0.54 | ceil }}'
+polling_headers:
+polling_body:
+id: 518921
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
 custom_fields:
-  - keyname: about
-    field_type: author_bio
-    name: About
-    description: >-
-      The aircraft over your home right now: the nearest one large with its photograph, callsign, type, operator, route,
-      height, speed, distance and heading, and the next four along a strip. Positions from adsb.lol, routes from adsbdb,
-      photographs from planespotters.net, each credited to its photographer. Silhouettes stand in where no photo exists;
-      an empty sky says so and remembers what passed last. A port of dmellok's Tesserae Overhead widget.
-      Source and issues: <a href="https://github.com/PhyberApex/trmnl-overhead">github.com/PhyberApex/trmnl-overhead</a>.
-    github_url: https://github.com/PhyberApex/trmnl-overhead
-    learn_more_url: https://github.com/dmellok/tesserae-widget-overhead
-    category: Lifestyle
-  - keyname: location
-    field_type: lat_lon
-    name: Home
-    description: The point the sky is watched from. Search a city or address, or paste "lat, lon".
-    optional: false
-  - keyname: place
-    field_type: string
-    name: Place name
-    description: How the header names your home.
-    placeholder: Home
-    default: Home
-    maxlength: 24
-  - keyname: radius_km
-    field_type: number
-    name: Radius (km)
-    description: How far out counts as overhead. 40 km is a good start; a busy approach wants less.
-    default: 40
-    min: 5
-    max: 250
-    step: 5
-  - keyname: show_ground
-    field_type: select
-    name: Aircraft on the ground
-    description: Whether taxiing aircraft at a nearby airport count.
-    options:
-      - Hide: 'no'
-      - Show: 'yes'
-    default: 'no'
+- keyname: about
+  field_type: author_bio
+  name: About
+  description: 'The aircraft over your home right now: the nearest one large with its photograph, callsign, type, operator, route, height, speed, distance and heading, and the next four along a strip. Positions from adsb.lol, routes from adsbdb, photographs from planespotters.net, each credited to its photographer. Silhouettes stand in where no photo exists; an empty sky says so and remembers what passed last. A port of dmellok''s Tesserae Overhead widget. Source and issues: <a href="https://github.com/PhyberApex/trmnl-overhead">github.com/PhyberApex/trmnl-overhead</a>.'
+  github_url: https://github.com/PhyberApex/trmnl-overhead
+  learn_more_url: https://github.com/dmellok/tesserae-widget-overhead
+  category: travel,discovery
+- keyname: location
+  field_type: lat_lon
+  name: Home
+  description: The point the sky is watched from. Search a city or address, or paste "lat, lon".
+  optional: false
+- keyname: place
+  field_type: string
+  name: Place name
+  description: How the header names your home.
+  placeholder: Home
+  default: Home
+  maxlength: 24
+- keyname: radius_km
+  field_type: number
+  name: Radius (km)
+  description: How far out counts as overhead. 40 km is a good start; a busy approach wants less.
+  default: 40
+  min: 5
+  max: 250
+  step: 5
+- keyname: show_ground
+  field_type: boolean
+  name: Aircraft on the ground
+  description: Whether taxiing aircraft at a nearby airport count.
+  default: false
+name: Overhead
+description:
+refresh_interval: 15

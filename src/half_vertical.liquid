@@ -1,0 +1,35 @@
+{% assign hero = sky.aircraft[0] %}
+<div class="layout layout--col gap--small">
+  {% if sky.error == true %}
+    <div class="flex flex--col flex--center h--full">
+      <span class="title">The feed is silent</span>
+      <span class="description">adsb.lol did not answer.</span>
+    </div>
+  {% elsif sky.count == 0 %}
+    <div class="flex flex--col flex--center h--full">
+      <span class="title">Quiet sky</span>
+      <span class="description">Nothing within {{ sky.radiusKm }} km{% if sky.lastSeen %} · last {{ sky.lastSeen.cs }}, {{ sky.lastSeen.typ }} at {{ sky.lastSeen.clock }}{% endif %}</span>
+    </div>
+  {% else %}
+    <div class="flex flex--row gap--large" style="padding-top: 6px">
+      <div class="flex flex--col">
+        <span class="value value--large">{{ hero.cs }}</span>
+        <span class="label">{{ hero.typ }}{% if hero.reg != "" %} · {{ hero.reg }}{% endif %}{% if hero.airline != "" and hero.airline != "private" %} · {{ hero.airline }}{% endif %}</span>
+        <span class="description">{% if hero.route %}{{ hero.route.origin }} → {{ hero.route.dest }} · {% endif %}{{ hero.altText }} · {{ hero.gs }} kt · {{ hero.where }} · hdg {{ hero.heading }}°</span>
+      </div>
+    </div>
+    {% if sky.aircraft.size > 1 %}
+      <table class="table">
+        <tbody>
+          {% for a in sky.aircraft offset: 1 limit: 3 %}
+            <tr><td><span class="label">{{ a.cs }}</span></td><td><span class="description">{{ a.typ }}</span></td><td><span class="description">{{ a.altText }} · {{ a.km }} km {{ a.compass }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  {% endif %}
+</div>
+<div class="title_bar">
+  <span class="title">Overhead · {{ sky.place }}</span>
+  <span class="instance">{{ sky.count }} within {{ sky.radiusKm }} km · {{ sky.clock }}</span>
+</div>
