@@ -1,5 +1,5 @@
 {% assign hero = sky.aircraft[0] %}
-<div class="layout layout--col gap--small">
+<div class="layout layout--col layout--top layout--left gap--small">
   {% if sky.error == true %}
     <div class="flex flex--col flex--center h--full">
       <span class="title">The feed is silent</span>
@@ -11,7 +11,7 @@
       <span class="description">Nothing within {{ sky.radiusKm }} km{% if sky.lastSeen %} · last {{ sky.lastSeen.cs }}, {{ sky.lastSeen.typ }} at {{ sky.lastSeen.clock }}{% endif %}</span>
     </div>
   {% else %}
-    <div class="flex flex--row gap--large" style="padding-top: 6px">
+    <div class="flex flex--row gap--large">
       <div class="flex flex--col">
         <span class="value value--large">{{ hero.cs }}</span>
         <span class="label">{{ hero.typ }}{% if hero.reg != "" %} · {{ hero.reg }}{% endif %}{% if hero.airline != "" and hero.airline != "private" %} · {{ hero.airline }}{% endif %}</span>
