@@ -1,0 +1,8 @@
+---
+# Local preview with `trmnlp serve`: fill in your own home.
+custom_fields:
+  location: '49.4722, 7.7677'
+  place: Home
+  radius_km: 40
+  show_ground: 'no'
+time_zone: Europe/Berlin
