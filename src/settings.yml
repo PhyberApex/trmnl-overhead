@@ -2,7 +2,7 @@
 name: Overhead
 strategy: polling
 polling_verb: get
-polling_url: https://api.adsb.lol/v2/lat/{{ location | split: "," | first | strip }}/lon/{{ location | split: "," | last | strip }}/dist/{{ radius_km | default: 40 | times: 0.54 | ceil }}
+polling_url: 'https://api.adsb.lol/v2/lat/{{ location | split: "," | first | strip }}/lon/{{ location | split: "," | last | strip }}/dist/{{ radius_km | default: 40 | times: 0.54 | ceil }}'
 polling_headers: 'accept=application/json&user-agent=trmnl-overhead/0.2 (+https://github.com/PhyberApex/trmnl-overhead)'
 refresh_interval: 10
 no_screen_padding: 'yes'
